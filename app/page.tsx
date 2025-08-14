@@ -1,15 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronRight, Monitor, Target, Users, Bell, RefreshCw } from "lucide-react"
+import { ChevronRight, Monitor, Target, Bell, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import CommandCenterPage from "@/app/overview/page"
-import AgentDashboardPage from "@/app/agent-dashboard/page"
-import AgentMonitorPage from "@/app/agent-monitor/page"
 import Image from "next/image";
+import AgentMonitorPage from "@/app/agent-monitor/page";
 
 export default function Page ()  {
-  const [activeSection, setActiveSection] = useState("overview")
+  const [activeSection, setActiveSection] = useState("OVERVIEW")
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   return (
@@ -41,9 +40,8 @@ export default function Page ()  {
 
             <nav className="space-y-2">
               {[
-                { id: "overview", icon: Target, label: "OVERVIEW" },
-                { id: "agents", icon: Users, label: "AGENTS DASHBOARD" },
-                { id: "systems", icon: Monitor, label: "AGENTS MONITOR " },
+                { id: "OVERVIEW", icon: Target},
+                { id: "AGENTS MONITOR", icon: Monitor},
               ].map((item) => (
                   <button
                       key={item.id}
@@ -55,7 +53,7 @@ export default function Page ()  {
                       }`}
                   >
                     <item.icon className="w-5 h-5 md:w-5 md:h-5 sm:w-6 sm:h-6" />
-                    {!sidebarCollapsed && <span className="text-sm font-medium">{item.label}</span>}
+                    {!sidebarCollapsed && <span className="text-sm font-medium">{item.id}</span>}
                   </button>
               ))}
             </nav>
@@ -87,7 +85,7 @@ export default function Page ()  {
           <div className="h-16 bg-neutral-800 border-b border-neutral-700 flex items-center justify-between px-6">
             <div className="flex items-center gap-4">
               <div className="text-sm text-neutral-400">
-                MORPHER-VM / <span className="text-orange-500">OVERVIEW</span>
+                MORPHER-VM / <span className="text-orange-500">{activeSection}</span>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -103,9 +101,9 @@ export default function Page ()  {
 
           {/* Dashboard Content */}
           <div className="flex-1 overflow-auto">
-            {activeSection === "overview" && <CommandCenterPage />}
-            {activeSection === "agents" && <AgentDashboardPage />}
-            {activeSection === "systems" && <AgentMonitorPage />}
+            {activeSection === "OVERVIEW" && <CommandCenterPage />}
+            {activeSection === "AGENTS MONITOR" && <AgentMonitorPage />}
+            {activeSection === "AGENTS MONITOR dev" && <AgentMonitorPage />}
           </div>
         </div>
       </div>
