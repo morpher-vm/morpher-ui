@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import AgentSystemInfoStore from "@/store/AgentSystemInfoStore";
-import {useEffect} from "react";
 import GetAgentSystemInfoList from "@/util/axios/GetAgentSystemInfoList";
+import { useEffect } from "react";
 
 export default function CommandCenterPage() {
-  const {setAgentSystemInfoList} = AgentSystemInfoStore();
+  const { setAgentSystemInfoList } = AgentSystemInfoStore();
   useEffect(() => {
     const fetchData = async () => {
-        const data = await GetAgentSystemInfoList();
-        setAgentSystemInfoList(data);
+      const data = await GetAgentSystemInfoList();
+      setAgentSystemInfoList(data);
     };
 
     fetchData();
   }, []);
 
-  GetAgentSystemInfoList()
+  GetAgentSystemInfoList();
 
   return (
     <div className="p-6 space-y-6">
@@ -25,20 +25,28 @@ export default function CommandCenterPage() {
         {/* Agent Status Overview */}
         <Card className="lg:col-span-4 bg-neutral-900 border-neutral-700">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-neutral-300 tracking-wider">AGENT ALLOCATION</CardTitle>
+            <CardTitle className="text-sm font-medium text-neutral-300 tracking-wider">
+              AGENT ALLOCATION
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="text-center">
-                <div className="text-2xl font-bold text-white font-mono">190</div>
+                <div className="text-2xl font-bold text-white font-mono">
+                  190
+                </div>
                 <div className="text-xs text-neutral-500">Active Field</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-white font-mono">990</div>
+                <div className="text-2xl font-bold text-white font-mono">
+                  990
+                </div>
                 <div className="text-xs text-neutral-500">Undercover</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-white font-mono">290</div>
+                <div className="text-2xl font-bold text-white font-mono">
+                  290
+                </div>
                 <div className="text-xs text-neutral-500">Training</div>
               </div>
             </div>
@@ -48,7 +56,11 @@ export default function CommandCenterPage() {
                 { id: "G-078W", name: "VENGEFUL SPIRIT", status: "active" },
                 { id: "G-079X", name: "OBSIDIAN SENTINEL", status: "standby" },
                 { id: "G-080Y", name: "GHOSTLY FURY", status: "active" },
-                { id: "G-081Z", name: "CURSED REVENANT", status: "compromised" },
+                {
+                  id: "G-081Z",
+                  name: "CURSED REVENANT",
+                  status: "compromised",
+                },
               ].map((agent) => (
                 <div
                   key={agent.id}
@@ -60,13 +72,17 @@ export default function CommandCenterPage() {
                         agent.status === "active"
                           ? "bg-white"
                           : agent.status === "standby"
-                            ? "bg-neutral-500"
-                            : "bg-red-500"
+                          ? "bg-neutral-500"
+                          : "bg-red-500"
                       }`}
                     ></div>
                     <div>
-                      <div className="text-xs text-white font-mono">{agent.id}</div>
-                      <div className="text-xs text-neutral-500">{agent.name}</div>
+                      <div className="text-xs text-white font-mono">
+                        {agent.id}
+                      </div>
+                      <div className="text-xs text-neutral-500">
+                        {agent.name}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -78,7 +94,9 @@ export default function CommandCenterPage() {
         {/* Activity Log */}
         <Card className="lg:col-span-4 bg-neutral-900 border-neutral-700">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-neutral-300 tracking-wider">ACTIVITY LOG</CardTitle>
+            <CardTitle className="text-sm font-medium text-neutral-300 tracking-wider">
+              ACTIVITY LOG
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3 max-h-80 overflow-y-auto">
@@ -125,12 +143,19 @@ export default function CommandCenterPage() {
                 >
                   <div className="text-neutral-500 font-mono">{log.time}</div>
                   <div className="text-white">
-                    Agent <span className="text-orange-500 font-mono">{log.agent}</span> {log.action}{" "}
+                    Agent{" "}
+                    <span className="text-orange-500 font-mono">
+                      {log.agent}
+                    </span>{" "}
+                    {log.action}{" "}
                     <span className="text-white font-mono">{log.location}</span>
                     {log.target && (
                       <span>
                         {" "}
-                        with agent <span className="text-orange-500 font-mono">{log.target}</span>
+                        with agent{" "}
+                        <span className="text-orange-500 font-mono">
+                          {log.target}
+                        </span>
                       </span>
                     )}
                   </div>
@@ -166,11 +191,17 @@ export default function CommandCenterPage() {
               <div className="flex justify-between">
                 <span># 2025-06-17 14:23 UTC</span>
               </div>
-              <div className="text-white">{"> [AGT:gh0stfire] ::: INIT >> ^^^ loading secure channel"}</div>
-              <div className="text-orange-500">{"> CH#2 | 1231.9082464.500...xR3"}</div>
+              <div className="text-white">
+                {"> [AGT:gh0stfire] ::: INIT >> ^^^ loading secure channel"}
+              </div>
+              <div className="text-orange-500">
+                {"> CH#2 | 1231.9082464.500...xR3"}
+              </div>
               <div className="text-white">{"> KEY LOCKED"}</div>
               <div className="text-neutral-400">
-                {'> MSG >> "...mission override initiated... awaiting delta node clearance"'}
+                {
+                  '> MSG >> "...mission override initiated... awaiting delta node clearance"'
+                }
               </div>
             </div>
           </CardContent>
@@ -229,14 +260,18 @@ export default function CommandCenterPage() {
         {/* Mission Information */}
         <Card className="lg:col-span-4 bg-neutral-900 border-neutral-700">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-neutral-300 tracking-wider">MISSION INFORMATION</CardTitle>
+            <CardTitle className="text-sm font-medium text-neutral-300 tracking-wider">
+              MISSION INFORMATION
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span className="text-xs text-white font-medium">Successful Missions</span>
+                  <span className="text-xs text-white font-medium">
+                    Successful Missions
+                  </span>
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs">
@@ -244,7 +279,9 @@ export default function CommandCenterPage() {
                     <span className="text-white font-bold font-mono">190</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-neutral-400">Medium Risk Mission</span>
+                    <span className="text-neutral-400">
+                      Medium Risk Mission
+                    </span>
                     <span className="text-white font-bold font-mono">426</span>
                   </div>
                   <div className="flex justify-between text-xs">
@@ -257,7 +294,9 @@ export default function CommandCenterPage() {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  <span className="text-xs text-red-500 font-medium">Failed Missions</span>
+                  <span className="text-xs text-red-500 font-medium">
+                    Failed Missions
+                  </span>
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between text-xs">
@@ -265,7 +304,9 @@ export default function CommandCenterPage() {
                     <span className="text-white font-bold font-mono">190</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-neutral-400">Medium Risk Mission</span>
+                    <span className="text-neutral-400">
+                      Medium Risk Mission
+                    </span>
                     <span className="text-white font-bold font-mono">426</span>
                   </div>
                   <div className="flex justify-between text-xs">
@@ -279,5 +320,5 @@ export default function CommandCenterPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
