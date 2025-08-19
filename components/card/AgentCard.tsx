@@ -6,9 +6,6 @@ import {
     Server,
 } from "lucide-react";
 import {useEffect, useState} from "react";
-import getStatusIcon from "@/util/icon/GetStatusIcon";
-import getStatusColor from "@/util/icon/GetStatusColor";
-import getHealthColor from "@/util/icon/GetHealthColor";
 
 interface props {
     props: AgentSystemInfo;
@@ -43,19 +40,9 @@ const AgentCard = ({props, setSelectedSystemTest}: props) => {
                             <CardTitle className="text-sm font-bold text-white tracking-wider">{props.name}</CardTitle>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                        {getStatusIcon(props.status)}
-                        <Badge className={getStatusColor(props.status)}>{props.status.toUpperCase()}</Badge>
-                    </div>
                 </div>
             </CardHeader>
             <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                    <span className="text-xs text-neutral-400">SYSTEM HEALTH</span>
-                    <span className={`text-sm font-bold font-mono ${getHealthColor(props.health)}`}>{props.health}%</span>
-                </div>
-                <Progress value={props.health} className="h-2" />
-
                 <div className="grid grid-cols-3 gap-4 text-xs">
                     <div>
                         <div className="text-neutral-400 mb-1">CPU</div>

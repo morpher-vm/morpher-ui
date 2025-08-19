@@ -1,8 +1,23 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import AgentSystemInfoStore from "@/store/AgentSystemInfoStore";
+import {useEffect} from "react";
+import GetAgentSystemInfoList from "@/util/axios/GetAgentSystemInfoList";
 
 export default function CommandCenterPage() {
+  const {setAgentSystemInfoList} = AgentSystemInfoStore();
+  useEffect(() => {
+    const fetchData = async () => {
+        const data = await GetAgentSystemInfoList();
+        setAgentSystemInfoList(data);
+    };
+
+    fetchData();
+  }, []);
+
+  GetAgentSystemInfoList()
+
   return (
     <div className="p-6 space-y-6">
       {/* Main Dashboard Grid */}
