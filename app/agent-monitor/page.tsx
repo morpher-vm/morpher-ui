@@ -9,87 +9,14 @@ import {
   CheckCircle,
   Settings,
 } from "lucide-react"
-import AgentCard from "@/components/card/AgentCard";
 import AgentSystemInfo from "@/types/AgentSystemInfo";
 import AgentDetailModal from "@/components/modal/AgentDetailModal";
+import AgentSystemInfoStore from "@/store/AgentSystemInfoStore";
+import AgentCard from "@/components/card/AgentCard";
 
 export default function AgentMonitorPage() {
   const [selectedSystem, setSelectedSystem] = useState<AgentSystemInfo|null>(null)
-
-  const mockSystemInfo: AgentSystemInfo = {
-    id: "testId01",
-    name: "testName",
-    status: "online",
-    health: 100,
-    "os": {
-      "name": "Darwin",
-      "version": "15.6",
-      "kernel_version": "24.6.0"
-    },
-    "cpu": {
-      "arch": "arm64",
-      "vcpus": 10,
-      "model": "Apple M4",
-      "mhz_per_cpu": 4
-    },
-    "ram": {
-      "total_mb": 24576,
-      "used_mb": 13578,
-      "free_mb": 10997
-    },
-    "disk": {
-      "mounts": [
-        {
-          "mount": "/",
-          "total_gb": 460.4,
-          "used_gb": 74.4,
-          "used_percent": 16.2
-        },
-        {
-          "mount": "/System/Volumes/VM",
-          "total_gb": 460.4,
-          "used_gb": 74.4,
-          "used_percent": 16.2
-        },
-        {
-          "mount": "/System/Volumes/Preboot",
-          "total_gb": 460.4,
-          "used_gb": 74.4,
-          "used_percent": 16.2
-        },
-        {
-          "mount": "/System/Volumes/Update",
-          "total_gb": 460.4,
-          "used_gb": 74.4,
-          "used_percent": 16.2
-        },
-        {
-          "mount": "/System/Volumes/xarts",
-          "total_gb": 0.5,
-          "used_gb": 0,
-          "used_percent": 3.6
-        },
-        {
-          "mount": "/System/Volumes/iSCPreboot",
-          "total_gb": 0.5,
-          "used_gb": 0,
-          "used_percent": 3.6
-        },
-        {
-          "mount": "/System/Volumes/Hardware",
-          "total_gb": 0.5,
-          "used_gb": 0,
-          "used_percent": 3.6
-        },
-        {
-          "mount": "/System/Volumes/Data",
-          "total_gb": 460.4,
-          "used_gb": 74.4,
-          "used_percent": 16.2
-        }
-      ]
-    }
-  };
+  const {agentSystemInfoList} = AgentSystemInfoStore();
 
   return (
     <div className="p-6 space-y-6">
@@ -158,7 +85,11 @@ export default function AgentMonitorPage() {
 
       {/* Systems Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        <AgentCard props={mockSystemInfo} setSelectedSystemTest={setSelectedSystem}/>
+        {
+          agentSystemInfoList && agentSystemInfoList.map(((agentInfo, key) =>
+            <AgentCard key={key} props={agentInfo} setSelectedSystemTest={setSelectedSystem} />
+          ))
+        }
       </div>
 
       {/* System Detail Modal */}
