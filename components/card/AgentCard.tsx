@@ -1,6 +1,4 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {Badge} from "@/components/ui/badge";
-import {Progress} from "@/components/ui/progress";
 import AgentSystemInfo from "@/types/AgentSystemInfo";
 import {
     Server,
@@ -37,7 +35,7 @@ const AgentCard = ({props, setSelectedSystemTest}: props) => {
                     <div className="flex items-center gap-3">
                         <Server className="w-6 h-6" />
                         <div>
-                            <CardTitle className="text-sm font-bold text-white tracking-wider">{props.name}</CardTitle>
+                            <CardTitle className="text-sm font-bold text-white tracking-wider">{props.os.hostname}</CardTitle>
                         </div>
                     </div>
                 </div>
