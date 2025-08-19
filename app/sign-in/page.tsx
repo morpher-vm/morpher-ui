@@ -22,11 +22,11 @@ export default function LoginPage() {
     try {
       const req: LoginRequest = { username, password };
       const res = await login(req);
-      // Add logic for storing token, etc. if needed
+      localStorage.setItem("token", res.token);
       if (res.mustChangePassword) {
         router.push("/change-password");
       } else {
-        router.push("/dashboard");
+        router.push("/agent-dashboard");
       }
     } catch (err: any) {
       setError(err.message || "Login failed");
