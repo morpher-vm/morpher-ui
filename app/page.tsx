@@ -1,11 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronRight, Monitor, Target, Bell, RefreshCw } from "lucide-react"
+import { ChevronRight, Monitor, Target, Bell, RefreshCw, Cloud} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import CommandCenterPage from "@/app/overview/page"
 import Image from "next/image";
 import AgentMonitorPage from "@/app/agent-monitor/page";
+import VmwareMigrationCostPage from "@/app/vmware-migration-cost/page";
 
 export default function Page ()  {
   const [activeSection, setActiveSection] = useState("OVERVIEW")
@@ -42,6 +43,7 @@ export default function Page ()  {
               {[
                 { id: "OVERVIEW", icon: Target},
                 { id: "AGENTS MONITOR", icon: Monitor},
+                { id: "VMWARE MIGRATION COST", icon: Cloud}
               ].map((item) => (
                   <button
                       key={item.id}
@@ -104,6 +106,7 @@ export default function Page ()  {
             {activeSection === "OVERVIEW" && <CommandCenterPage />}
             {activeSection === "AGENTS MONITOR" && <AgentMonitorPage />}
             {activeSection === "AGENTS MONITOR dev" && <AgentMonitorPage />}
+            {activeSection === "VMWARE MIGRATION COST" && <VmwareMigrationCostPage />}
           </div>
         </div>
       </div>
