@@ -31,7 +31,7 @@ const AgentDetailModal = ({selectedSystemTest, setSelectedSystemTest} : props) =
                     <div className="flex items-center gap-3">
                         <Server className="w-6 h-6" />
                         <div>
-                            <CardTitle className="text-xl font-bold text-white tracking-wider">{selectedSystemTest.name}</CardTitle>
+                            <CardTitle className="text-xl font-bold text-white tracking-wider">{selectedSystemTest.os.hostname}</CardTitle>
                             <p className="text-sm text-neutral-400">
                                 {selectedSystemTest.id}
                             </p>

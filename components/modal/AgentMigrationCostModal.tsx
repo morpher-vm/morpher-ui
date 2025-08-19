@@ -38,7 +38,7 @@ const AgentMigrationCostModal = ({selectedAgentSystem, setSelectedAgentSystem} :
                     <div className="flex items-center gap-3">
                         <Server className="w-6 h-6" />
                         <div>
-                            <CardTitle className="text-xl font-bold text-white tracking-wider">{selectedAgentSystem.name}</CardTitle>
+                            <CardTitle className="text-xl font-bold text-white tracking-wider">{selectedAgentSystem.os.hostname}</CardTitle>
                             <p className="text-sm text-neutral-400">
                                 {selectedAgentSystem.id}
                             </p>

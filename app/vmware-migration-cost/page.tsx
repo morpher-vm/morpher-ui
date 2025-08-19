@@ -16,7 +16,7 @@ export default function AgentNetworkPage() {
 
   const filteredAgents = agentSystemInfoList.filter(
       (agent) =>
-          agent.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          agent.os.hostname.toLowerCase().includes(searchTerm.toLowerCase()) ||
           agent.id.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
@@ -112,7 +112,7 @@ export default function AgentNetworkPage() {
                 </tr>
                 </thead>
                 <tbody>
-                {filteredAgents.map((agent, index) => (
+                {filteredAgents && filteredAgents.map((agent, index) => (
                     <tr
                         key={agent.id}
                         className={`border-b border-neutral-800 hover:bg-neutral-800 transition-colors cursor-pointer ${
@@ -121,7 +121,7 @@ export default function AgentNetworkPage() {
                         onClick={() => setSelectedAgent(agent)}
                     >
                       <td className="py-3 px-4 text-sm text-white font-mono">{agent.id}</td>
-                      <td className="py-3 px-4 text-sm text-white">{agent.name}</td>
+                      <td className="py-3 px-4 text-sm text-white">{agent.os.hostname}</td>
                       <td className="py-3 px-4 text-sm text-white">{agent.os.name}({agent.os.version})</td>
                       <td className="py-3 px-4 text-sm text-white">{agent.cpu.vcpus}</td>
                       <td className="py-3 px-4 text-sm text-white">{agent.ram.total_mb / 1024} GB</td>

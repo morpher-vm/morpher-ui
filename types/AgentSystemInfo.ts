@@ -1,5 +1,6 @@
 interface OSInfo {
     name: string;
+    hostname: string;
     version: string;
     kernel_version: string;
 }
@@ -30,7 +31,6 @@ interface DiskInfo {
 
 interface SystemInfo {
     id: string;
-    name: string;
     os: OSInfo;
     cpu: CPUInfo;
     ram: RAMInfo;
