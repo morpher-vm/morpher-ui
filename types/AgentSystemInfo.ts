@@ -31,8 +31,6 @@ interface DiskInfo {
 interface SystemInfo {
     id: string;
     name: string;
-    status: string;
-    health: number;
     os: OSInfo;
     cpu: CPUInfo;
     ram: RAMInfo;
