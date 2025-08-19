@@ -1,11 +1,7 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
-import {Badge} from "@/components/ui/badge";
 import AgentSystemInfo from "@/types/AgentSystemInfo";
 import {Server} from "lucide-react";
-import getStatusIcon from "@/util/icon/GetStatusIcon";
-import getStatusColor from "@/util/icon/GetStatusColor";
-import getHealthColor from "@/util/icon/GetHealthColor";
 import {useEffect, useState} from "react";
 
 interface props {
@@ -52,16 +48,6 @@ const AgentDetailModal = ({selectedSystemTest, setSelectedSystemTest} : props) =
                 <CardContent className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-4">
-                            <div>
-                                <h3 className="text-sm font-medium text-neutral-300 tracking-wider mb-2">SYSTEM STATUS</h3>
-                                <div className="flex items-center gap-2">
-                                    {getStatusIcon(selectedSystemTest.status)}
-                                    <Badge className={getStatusColor(selectedSystemTest.status)}>
-                                        {selectedSystemTest.status.toUpperCase()}
-                                    </Badge>
-                                </div>
-                            </div>
-
                             <div>
                                 <h3 className="text-sm font-medium text-neutral-300 tracking-wider mb-2">SYSTEM INFORMATION</h3>
                                 <div className="space-y-2 text-sm">
@@ -145,10 +131,6 @@ const AgentDetailModal = ({selectedSystemTest, setSelectedSystemTest} : props) =
 
                                     <div className="flex justify-between">
                                         <span className="text-neutral-400">Health Score:</span>
-
-                                        <span className={`font-mono ${getHealthColor(selectedSystemTest.health)}`}>
-                                            {selectedSystemTest.health}%
-                                        </span>
                                     </div>
                                 </div>
                             </div>
