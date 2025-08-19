@@ -13,14 +13,14 @@ interface props {
 }
 
 const AgentMigrationCostModal = ({selectedAgentSystem, setSelectedAgentSystem} : props) => {
-    const [ec2List, setEc2List] = useState<EC2Instance[] | null>([])
+    const [ec2List, setEc2List] = useState<EC2Instance[]>([])
 
     useEffect(() => {
         const fetchData = async () => {
             const test : GetAwsEc2PriceRequest = {
                 "region":      "ap-northeast-1",
                 "minVCpu":     selectedAgentSystem.cpu.vcpus,
-                "minMemoryGB": selectedAgentSystem.ram.total_mb / 1024,
+                "minMemoryGB": Math.ceil(selectedAgentSystem.ram.total_mb / 1024),
                 "os":          "Linux",
                 "maxResults":  10
             }
