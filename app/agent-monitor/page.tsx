@@ -4,12 +4,14 @@ import AgentCard from "@/components/card/AgentCard";
 import AgentDetailModal from "@/components/modal/AgentDetailModal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAuthGuard } from "@/lib/useAuthGuard";
 import AgentSystemInfoStore from "@/store/AgentSystemInfoStore";
 import AgentSystemInfo from "@/types/AgentSystemInfo";
 import { Activity, AlertTriangle, CheckCircle, Settings } from "lucide-react";
 import { useState } from "react";
 
 export default function AgentMonitorPage() {
+  useAuthGuard();
   const [selectedSystem, setSelectedSystem] = useState<AgentSystemInfo | null>(
     null
   );
@@ -103,7 +105,7 @@ export default function AgentMonitorPage() {
       {/* Systems Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {agentSystemInfoList &&
-          agentSystemInfoList.map((agentInfo, key) => (
+          agentSystemInfoList.map((agentInfo: AgentSystemInfo, key: number) => (
             <AgentCard
               key={key}
               props={agentInfo}
