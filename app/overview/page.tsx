@@ -1,11 +1,13 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAuthGuard } from "@/lib/useAuthGuard";
 import AgentSystemInfoStore from "@/store/AgentSystemInfoStore";
 import GetAgentSystemInfoList from "@/util/axios/GetAgentSystemInfoList";
 import { useEffect } from "react";
 
 export default function CommandCenterPage() {
+  useAuthGuard();
   const { setAgentSystemInfoList } = AgentSystemInfoStore();
   useEffect(() => {
     const fetchData = async () => {
