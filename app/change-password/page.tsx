@@ -5,7 +5,8 @@ import { useAuthGuard } from "@/lib/useAuthGuard";
 import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { changePassword } from "@/lib/api/auth";
 
 export default function ChangePasswordPage() {
   useAuthGuard();
@@ -19,6 +20,13 @@ export default function ChangePasswordPage() {
   const [error, setError] = useState("");
   const [showPasswordGuide, setShowPasswordGuide] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const mustChange = localStorage.getItem("mustChangePassword");
+    if (mustChange !== "true") {
+      router.replace("/agent-dashboard");
+    }
+  }, [router]);
 
   // -----------------------------
   // Password Validation Rules
@@ -65,8 +73,14 @@ export default function ChangePasswordPage() {
     }
 
     // TODO: Replace with actual password update API call
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    router.push("/dashboard");
+    try {
+      await changePassword(newPassword);
+      localStorage.setItem("mustChangePassword", "false");
+      router.push("/agent-dashboard");
+    } catch (err: any) {
+      setError(err.message || "Password change failed");
+      return;
+    }
   };
 
   // -----------------------------

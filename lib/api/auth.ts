@@ -14,14 +14,19 @@ export async function login({
       mustChangePassword: false,
     };
   }
-  if (!SERVER_URL) {
-    throw new Error(
-      "No backend server configured. Set NEXT_PUBLIC_SERVER_URL."
-    );
-  }
   const response = await axios.post(`${SERVER_URL}/api/sign-in`, {
     username,
     password,
   });
   return response.data;
+}
+
+export async function changePassword(newPassword: string): Promise<void> {
+  const token = localStorage.getItem("token");
+
+  await axios.post(
+    `${SERVER_URL}/api/change-password`,
+    { newPassword },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
 }
