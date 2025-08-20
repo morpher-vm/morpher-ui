@@ -4,7 +4,7 @@ export interface EC2Instance {
     memory: string;
     storage: string;
     networkPerformance: string;
-    pricePerHour: string;
+    pricePerHour: number;
     description: string;
     location: string;
     operatingSystem: string;
