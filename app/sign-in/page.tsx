@@ -23,6 +23,7 @@ export default function LoginPage() {
       const req: LoginRequest = { username, password };
       const res = await login(req);
       localStorage.setItem("token", res.token);
+      localStorage.setItem("mustChangePassword", JSON.stringify(res.mustChangePassword));
       if (res.mustChangePassword) {
         router.push("/change-password");
       } else {
