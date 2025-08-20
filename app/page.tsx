@@ -1,7 +1,6 @@
 "use client";
 
 import AgentMonitorPage from "@/app/agent-monitor/page";
-import CommandCenterPage from "@/app/overview/page";
 import VmwareMigrationCostPage from "@/app/vmware-migration-cost/page";
 import { Button } from "@/components/ui/button";
 import { useAuthGuard } from "@/lib/useAuthGuard";
@@ -11,15 +10,27 @@ import {
   Cloud,
   Monitor,
   RefreshCw,
-  Target,
 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import AgentSystemInfoStore from "@/store/AgentSystemInfoStore";
+import GetAgentSystemInfoList from "@/util/axios/GetAgentSystemInfoList";
 
 export default function Page() {
   useAuthGuard();
-  const [activeSection, setActiveSection] = useState("OVERVIEW");
+  const [activeSection, setActiveSection] = useState("AGENTS MONITOR");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const { setAgentSystemInfoList } = AgentSystemInfoStore();
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await GetAgentSystemInfoList();
+      setAgentSystemInfoList(data);
+    };
+
+    fetchData();
+  }, []);
+
+  GetAgentSystemInfoList();
 
   return (
     <div className="flex h-screen">
@@ -57,7 +68,6 @@ export default function Page() {
 
           <nav className="space-y-2">
             {[
-              { id: "OVERVIEW", icon: Target },
               { id: "AGENTS MONITOR", icon: Monitor },
               { id: "VMWARE MIGRATION COST", icon: Cloud },
             ].map((item) => (
@@ -137,9 +147,7 @@ export default function Page() {
 
         {/* Dashboard Content */}
         <div className="flex-1 overflow-auto">
-          {activeSection === "OVERVIEW" && <CommandCenterPage />}
           {activeSection === "AGENTS MONITOR" && <AgentMonitorPage />}
-          {activeSection === "AGENTS MONITOR dev" && <AgentMonitorPage />}
           {activeSection === "VMWARE MIGRATION COST" && (
             <VmwareMigrationCostPage />
           )}
