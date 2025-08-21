@@ -30,8 +30,6 @@ export default function Page() {
     fetchData();
   }, []);
 
-  GetAgentSystemInfoList();
-
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
