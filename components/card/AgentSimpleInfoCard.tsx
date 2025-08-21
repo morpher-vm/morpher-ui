@@ -1,5 +1,5 @@
 import {Cpu, HardDrive, Server} from "lucide-react";
-import { AgentSystemInfo } from "@/types/AgentSystemInfo";
+import AgentSystemInfo from "@/types/AgentSystemInfo";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 
 interface props {
@@ -84,15 +84,15 @@ const AgentSimpleInfoCard = ({agentSystemInfo}: props) => {
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-neutral-400">Used:</span>
-                                <span className="text-white">{Math.floor(agentSystemInfo.ram.used_mb / 1024 * 100) / 100 }</span>
+                                <span className="text-white">{(agentSystemInfo.ram.used_mb / 1024).toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-neutral-400">Available:</span>
-                                <span className="text-green-400">{Math.floor(agentSystemInfo.ram.free_mb / 1024 * 100) / 100}</span>
+                                <span className="text-green-400">{(agentSystemInfo.ram.free_mb / 1024).toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-neutral-400">Usage:</span>
-                                <span className="text-orange-400">{Math.floor((agentSystemInfo.ram.used_mb / 1024) / (agentSystemInfo.ram.total_mb / 1024) * 100)} %</span>
+                                <span className="text-orange-400">{((agentSystemInfo.ram.used_mb / 1024) / (agentSystemInfo.ram.total_mb / 1024) * 100).toFixed(1)} %</span>
                             </div>
                         </div>
                     </div>
