@@ -15,10 +15,11 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import AgentSystemInfoStore from "@/store/AgentSystemInfoStore";
 import GetAgentSystemInfoList from "@/util/axios/GetAgentSystemInfoList";
+import GetStartedPage from "@/app/get-started/page";
 
 export default function Page() {
   useAuthGuard();
-  const [activeSection, setActiveSection] = useState("AGENTS MONITOR");
+  const [activeSection, setActiveSection] = useState("GET STARTED");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const { setAgentSystemInfoList } = AgentSystemInfoStore();
   useEffect(() => {
@@ -66,6 +67,7 @@ export default function Page() {
 
           <nav className="space-y-2">
             {[
+              { id: "GET STARTED", icon: Monitor },
               { id: "AGENTS MONITOR", icon: Monitor },
               { id: "VMWARE MIGRATION COST", icon: Cloud },
             ].map((item) => (
@@ -145,6 +147,7 @@ export default function Page() {
 
         {/* Dashboard Content */}
         <div className="flex-1 overflow-auto">
+          {activeSection === "GET STARTED" && <GetStartedPage />}
           {activeSection === "AGENTS MONITOR" && <AgentMonitorPage />}
           {activeSection === "VMWARE MIGRATION COST" && (
             <VmwareMigrationCostPage />

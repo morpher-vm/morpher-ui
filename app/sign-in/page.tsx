@@ -27,7 +27,7 @@ export default function LoginPage() {
       if (res.mustChangePassword) {
         router.push("/change-password");
       } else {
-        router.push("/agent-dashboard");
+        router.push("/");
       }
     } catch (err: any) {
       setError(err.message || "Login failed");
