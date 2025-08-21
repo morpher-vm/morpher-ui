@@ -80,7 +80,7 @@ const Ec2InstanceCard = ({ec2Instance}: props) => {
 
                     <div className="flex justify-between items-center">
                         <div className="px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded">{ec2Instance.operatingSystem}</div>
-                        <div className="text-xs text-neutral-500">Asia Pacific (Tokyo)</div>
+                        <div className="text-xs text-neutral-500">{ec2Instance.location}</div>
                     </div>
                 </CardContent>
             </Card>

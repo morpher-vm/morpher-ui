@@ -29,7 +29,7 @@ interface DiskInfo {
     mounts: DiskMount[];
 }
 
-interface SystemInfo {
+interface AgentSystemInfo {
     id: string;
     os: OSInfo;
     cpu: CPUInfo;
@@ -37,4 +37,4 @@ interface SystemInfo {
     disk: DiskInfo;
 }
 
-export default SystemInfo
+export default AgentSystemInfo
