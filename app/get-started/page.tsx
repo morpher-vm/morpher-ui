@@ -37,7 +37,8 @@ sudo MORPHER_CONTROLLER_IP=<controller-ip> ./install_amd64.sh`
               cmd: `wget -O install_arm64.sh https://raw.githubusercontent.com/morpher-vm/morpher-agent/main/scripts/install_arm64.sh
 chmod +x install_arm64.sh
 sudo MORPHER_CONTROLLER_IP=<controller-ip> ./install_arm64.sh`
-          },          {
+          },
+          {
               type: "Verify",
               cmd: `systemctl status morpher-agent --no-pager
 journalctl -u morpher-agent -e --no-pager`
@@ -46,7 +47,7 @@ journalctl -u morpher-agent -e --no-pager`
       description: "Follow these steps to install morpher",
       icon: Monitor
     },
-      {
+    {
           id: 2,
           title: "Service Management",
           command: `sudo systemctl start morpher-agent
@@ -55,8 +56,8 @@ sudo systemctl status morpher-agent
 sudo journalctl -u morpher-agent -f`,
           description: "Service management command",
           icon: Monitor
-      },
-      {
+    },
+    {
           id: 3,
           title: "Delete agent",
           command: `sudo systemctl disable --now morpher-agent
@@ -66,9 +67,9 @@ sudo rm -f /usr/local/bin/morpher-agent
 sudo systemctl daemon-reload`,
           description: "Delete agent command",
           icon: Monitor
-      }
-
+    }
   ]
+
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
@@ -78,7 +79,7 @@ sudo systemctl daemon-reload`,
             GET STARTED
           </h1>
           <p className="text-sm text-neutral-400">
-            Get started morpher
+            Get started with Morpher
           </p>
         </div>
       </div>
@@ -131,9 +132,15 @@ sudo systemctl daemon-reload`,
                                     size="sm"
                                     variant="ghost"
                                     className="h-8 w-8 p-0 hover:bg-orange-500/20"
-                                    onClick={() => copyToClipboard(item.command)}
+                                    onClick={() => {
+                                        if (typeof item.command === "string") {
+                                            copyToClipboard(item.command);
+                                        } else {
+                                            console.warn("Attempted to copy a non-string command:", item.command);
+                                        }}
+                                    }
                                 >
-                                    {copiedCommand === item.command ? (
+                                    {typeof item.command === "string" && copiedCommand === item.command ? (
                                         <Check className="w-4 h-4 text-green-500" />
                                     ) : (
                                         <Copy className="w-4 h-4 text-gray-400" />
